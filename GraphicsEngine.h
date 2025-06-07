@@ -1,7 +1,7 @@
 #pragma once
 #include <epoxy/gl.h>
-#include "../Camera.h"
-#include "../ShaderStructs.h"
+#include "Camera.h"
+#include "ShaderStructs.h"
 #include <iostream>
 #include <fstream>
 #include <map>

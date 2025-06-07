@@ -4,7 +4,7 @@
 #include  <SDL2/SDL_opengl.h>
 #include "Game.h"
 #include "Material.h"
-#include "../glm/glm/ext/vector_float3.hpp"
+#include "glm/glm/ext/vector_float3.hpp"
 #include <SDL_events.h>
 #include <SDL_video.h>
 #include <iostream>

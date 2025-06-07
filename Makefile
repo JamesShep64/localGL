@@ -1,6 +1,6 @@
 CFLAGS = `pkg-config --cflags sdl2`
 LIBS = `pkg-config --libs sdl2 epoxy` 
-LINK = Material.cpp GraphicsEngine.cpp Input.cpp Game.cpp ../Camera.cpp
+LINK = Material.cpp GraphicsEngine.cpp Input.cpp Game.cpp Camera.cpp
 
 all:
 	g++ $(CFLAGS) main.cpp $(LINK) $(LIBS) -o app

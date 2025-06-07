@@ -1,9 +1,9 @@
 #pragma once
 #include <map>
 #include <SDL2/SDL.h>
-#include <SDL_events.h>
-#include "../glm/glm/ext/vector_float3.hpp"
-#include "SDL_video.h"
+#include <SDL2/SDL_events.h>
+#include "glm/glm/ext/vector_float3.hpp"
+#include <SDL2/SDL_video.h>
 enum  keys{
   SPACE = 32,
   A=97,

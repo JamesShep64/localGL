@@ -1,9 +1,9 @@
 #include "Material.h"
-#include "../glm/glm/ext/vector_float3.hpp"
+#include "glm/glm/ext/vector_float3.hpp"
 #include <iostream>
 #include <vector>
 #define STB_IMAGE_IMPLEMENTATION
-#include "../stb/stb_image.h"
+#include "stb/stb_image.h"
 #include <cstdio>
 #include <string>
 

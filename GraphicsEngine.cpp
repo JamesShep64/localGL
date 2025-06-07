@@ -1,6 +1,6 @@
 #include "GraphicsEngine.h"
 #include "Material.h"
-#include "../ShaderStructs.h"
+#include "ShaderStructs.h"
 #include <iostream>
 
 void GraphicsEngine::init(){

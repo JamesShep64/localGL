@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cmath>
 #include "Input.h"
-#include <SDL_events.h>
-#include "../glm/glm/common.hpp"
-#include "../glm/glm/ext/vector_float3.hpp"
-#include "../glm/glm/geometric.hpp"
-#include "../glm/glm/trigonometric.hpp"
+#include <SDL2/SDL_events.h>
+#include "glm/glm/common.hpp"
+#include "glm/glm/ext/vector_float3.hpp"
+#include "glm/glm/geometric.hpp"
+#include "glm/glm/trigonometric.hpp"
 #include "SDL_stdinc.h"
 #include "SDL_video.h"
 #include <string>
@@ -47,7 +47,7 @@ void Input::handleKeyboard(SDL_Event& event){
     past_keyboard = current_keyboard;
     switch( event.type ){
       case SDL_KEYDOWN:
-        std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
+        //std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
         current_keyboard[event.key.keysym.sym] = true;
         break;
 

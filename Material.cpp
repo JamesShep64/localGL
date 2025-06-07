@@ -131,8 +131,5 @@ bool Material::loadTexture(char* path, GLuint shaderProgram, char* textureName){
 
 void Material::drawElementArray(std::vector<unsigned int>& elements, Shader s){
     glUseProgram(s.shaderProgram);
-    glBindVertexArray(s.vao); 
-    glBindBuffer(GL_ARRAY_BUFFER,s.vbo); 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,s.veo); 
     glDrawElements(GL_TRIANGLES,elements.size(),GL_UNSIGNED_INT,0);
 }

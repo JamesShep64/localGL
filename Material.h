@@ -21,7 +21,6 @@ public:
 template<typename T>
 static void setTriangleBuffer(std::vector<T>& vertices,Shader s){
   glUseProgram(s.shaderProgram);
-  glBindVertexArray(s.vao); 
   glBufferData(GL_ARRAY_BUFFER, 
                  vertices.size() * sizeof(T), 
                  vertices.data(), 
@@ -31,7 +30,6 @@ static void setTriangleBuffer(std::vector<T>& vertices,Shader s){
 template<typename  T>
 static void drawTriangleArray(std::vector<T>& vertices,Shader s){
   glUseProgram(s.shaderProgram);
-  glBindVertexArray(s.vao); 
   glDrawArrays(GL_TRIANGLES,0,vertices.size());
 }
 

@@ -5,8 +5,8 @@
 #include "Game.h"
 #include "Material.h"
 #include "glm/glm/ext/vector_float3.hpp"
-#include <SDL_events.h>
-#include <SDL_video.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_video.h>
 #include <iostream>
 #include <vector>
 
@@ -35,7 +35,6 @@ void initGeometry(){
     if(!sky.loadTexture((char*)"./sky.jpg", g.skyShader,(char*)"sky"))
         std::cout<<"failed to load sky"<<"\n";
     shaderProgram = g.skyShader;
-    Material::setTriangleBuffer(sky.vertex_array, g.shaders[g.skyShader]);
     }
 void render(SDL_Window* window){
     int winWidth, winHeight;
@@ -43,18 +42,26 @@ void render(SDL_Window* window){
     glViewport(0,0,winWidth, winHeight);
     float z = 1.0;
     quit = game.update(z);
+
     glm::mat4 view = glm::lookAt(
     glm::vec3(0.0f, 0.0f, 300.0f),  // camera further back
-    glm::vec3(0.0f, 0.0f, 100.0f),  // looking at triangle
-    glm::vec3(0.0f, 1.0f, 0.0f)     // Y-up
-    );
+    glm::vec3(0.0f, 0.0f, 1.0f),  // looking at triangle
+    glm::vec3(0.0f, 1.0f, 0.0f));
     glm::mat4 model = glm::mat4(1.0f); // no transform
     glm::mat4 m = glm::scale(glm::mat4(1.0f),glm::vec3(3000,3000,3000));
     glm::mat4 perspective = glm::perspective(glm::radians(85.0f), 8.0f/6.0f, 0.1f, 1000.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    Material::setTriangleBuffer(triangleVertices, g.shaders[g.landShader]);
+    g.setCamera(g.landShader, game.cam);
+    g.setModel(m,g.landShader);
+    Material::drawTriangleArray(triangleVertices,g.shaders[g.landShader]);
+
+    Material::setTriangleBuffer(sky.vertex_array, g.shaders[g.skyShader]);
     g.setCamera(g.skyShader, game.cam);
     g.setModel(m,g.skyShader);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     Material::drawTriangleArray(sky.vertex_array,g.shaders[g.skyShader]);
+    
     SDL_GL_SwapWindow(pWindow);
 }
 int main() {

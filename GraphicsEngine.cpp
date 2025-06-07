@@ -82,14 +82,15 @@ GLuint GraphicsEngine::initShader(char* fragName, char* vertexName){
 }
 void GraphicsEngine::initLand(GLuint& shaderProgram){
     glUseProgram(shaderProgram);
-    GLuint vao, vbo;
+    GLuint vao, vbo, veo;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    
+    glGenBuffers(1, &veo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
     GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-    glVertexAttribPointer(posAttrib,3, GL_FLOAT,GL_FALSE,sizeof(float)*3, (void*)0);
+    glVertexAttribPointer(posAttrib,3, GL_FLOAT,GL_FALSE,sizeof(glm::vec3), (void*)0);
     glEnableVertexAttribArray(posAttrib);
     GLint modelUni = glGetUniformLocation(shaderProgram, "model");
 
@@ -110,7 +111,6 @@ void GraphicsEngine::initLand(GLuint& shaderProgram){
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glDisable(GL_CULL_FACE);
-
     GLenum err;
 while ((err = glGetError()) != GL_NO_ERROR) {
     std::cerr << "OpenGL error: " << std::hex << err << std::endl;

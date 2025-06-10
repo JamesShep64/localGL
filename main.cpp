@@ -4,6 +4,7 @@
 #include  <SDL2/SDL_opengl.h>
 #include "Game.h"
 #include "Material.h"
+#include "World.h"
 #include "glm/glm/ext/vector_float3.hpp"
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_video.h>
@@ -16,16 +17,15 @@ GraphicsEngine g;
 Game game;
 Material sky;
 SDL_Window* pWindow;
+World world = World();
 bool quit = false;
 std::vector<glm::vec3> triangleVertices = {
-    glm::vec3(0.0f,  500.0f, 100.0f),
-    glm::vec3(-500.0f, -500.0f, 100.0f),
-     glm::vec3(500.0f, -500.0f, 100.0f)
+    glm::vec3(0.0f,  0.0f, 100.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+     glm::vec3(100.0f, 0.0f, 0.0f)
 };
-std::vector<glm::vec3> verts = {
-    glm::vec3(0.0f,  0.5f, 0.0f),
-    glm::vec3(-0.5f, -0.5f, 0.0f),
-    glm::vec3(0.5f, -0.5f, 0.0f)
+std::vector<GLuint> elements = {
+    0,1,2
 };
 
 void initGeometry(){
@@ -51,16 +51,18 @@ void render(SDL_Window* window){
     glm::mat4 m = glm::scale(glm::mat4(1.0f),glm::vec3(3000,3000,3000));
     glm::mat4 perspective = glm::perspective(glm::radians(85.0f), 8.0f/6.0f, 0.1f, 1000.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    Material::setTriangleBuffer(triangleVertices, g.shaders[g.landShader]);
+    g.setArrayToLand(g.landShader);
+    Material::setTriangleBuffer(world.man.getVertices(), g.landShader);
     g.setCamera(g.landShader, game.cam);
-    g.setModel(m,g.landShader);
-    Material::drawTriangleArray(triangleVertices,g.shaders[g.landShader]);
+    g.setModel(model,g.landShader);
+    Material::setElementBuffer(world.indices,g.landShader);
+    Material::drawElementArray(world.indices,g.landShader);
 
-    Material::setTriangleBuffer(sky.vertex_array, g.shaders[g.skyShader]);
+    g.setArrayToSky(g.skyShader);
+    Material::setTriangleBuffer(sky.vertex_array, g.skyShader);
     g.setCamera(g.skyShader, game.cam);
     g.setModel(m,g.skyShader);
-    Material::drawTriangleArray(sky.vertex_array,g.shaders[g.skyShader]);
+    Material::drawTriangleArray(sky.vertex_array,g.skyShader);
     
     SDL_GL_SwapWindow(pWindow);
 }

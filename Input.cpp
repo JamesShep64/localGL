@@ -4,11 +4,10 @@
 #include "Input.h"
 #include <SDL2/SDL_events.h>
 #include "glm/glm/common.hpp"
+#include "glm/glm/ext/matrix_transform.hpp"
 #include "glm/glm/ext/vector_float3.hpp"
 #include "glm/glm/geometric.hpp"
 #include "glm/glm/trigonometric.hpp"
-#include "SDL_stdinc.h"
-#include "SDL_video.h"
 #include <string>
 
 Input::Input(){
@@ -69,7 +68,7 @@ glm::vec3 Input::translateCam(glm::vec3 look){
     glm::vec3 delta(0.0f, 0.0f, 0.0f);
     glm::vec3 up = glm::vec3(0,1,0);
     glm::vec3 forward = look;
-    glm::vec3 left = glm::normalize(glm::cross(up, forward));
+    glm::vec3 left = glm::normalize(glm::cross(up, forward)) * 4.0f;
     if(this->isPressed(A))
       delta+=left;
     if(this->isPressed(D))
@@ -83,13 +82,13 @@ glm::vec3 Input::translateCam(glm::vec3 look){
     if(this->isPressed(SHIFT))
       delta-=up; 
     if(this->isPressed(LEFT))
-      xCursorMotion-=5;
+      xCursorMotion-=15;
     if(this->isPressed(RIGHT))
-      xCursorMotion+=5;
+      xCursorMotion+=15;
     if(this->isPressed(UP))
-      yCursorMotion-=5;
+      yCursorMotion-=15;
     if(this->isPressed(DOWN))
-      yCursorMotion+=5;
+      yCursorMotion+=15;
     return delta;
 }
 glm::vec3 Input::lookCam(){

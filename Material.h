@@ -19,8 +19,8 @@ public:
   void loadElement(std::vector<glm::vec3>& vertices, std::vector<unsigned int>& indices);
 
 template<typename T>
-static void setTriangleBuffer(std::vector<T>& vertices,Shader s){
-  glUseProgram(s.shaderProgram);
+static void setTriangleBuffer(const std::vector<T>& vertices,GLuint shaderProgram){
+  glUseProgram(shaderProgram);
   glBufferData(GL_ARRAY_BUFFER, 
                  vertices.size() * sizeof(T), 
                  vertices.data(), 
@@ -28,8 +28,8 @@ static void setTriangleBuffer(std::vector<T>& vertices,Shader s){
 }
 
 template<typename  T>
-static void drawTriangleArray(std::vector<T>& vertices,Shader s){
-  glUseProgram(s.shaderProgram);
+static void drawTriangleArray(std::vector<T>& vertices,GLuint shaderProgram){
+  glUseProgram(shaderProgram);
   glDrawArrays(GL_TRIANGLES,0,vertices.size());
 }
 
@@ -42,7 +42,7 @@ static void setElementBuffer(std::vector<T>& elements, GLuint shaderProgram){
                  GL_STATIC_DRAW);
 }
 
-  static void drawElementArray(std::vector<unsigned int>& elements, Shader s);
+  static void drawElementArray(std::vector<unsigned int>& elements,  GLuint shaderProgram);
 
   bool loadTexture(char* path, GLuint shaderProgram, char* textureName);
   std::vector<Vertex> vertex_array;

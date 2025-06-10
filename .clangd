@@ -1,0 +1,10 @@
+CompileFlags:
+  Add: [
+    "-std=c++20",
+    "-I/usr/include",                   # default include
+    "-I/usr/include/SDL2",              # SDL headers
+    "-I/usr/include/tbb",               # TBB headers
+    "-lSDL2",                           # Link SDL2
+    "-lepoxy",                          # Link Epoxy
+    "-ltbb"                             # Link Intel TBB
+  ]

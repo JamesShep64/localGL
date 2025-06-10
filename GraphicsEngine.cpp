@@ -15,12 +15,13 @@ void GraphicsEngine::init(){
 void GraphicsEngine::initSky(GLuint& shaderProgram)
 {
    glUseProgram(shaderProgram);
-    GLuint vao, vbo;
+    GLuint vao, vbo, veo;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    
+    glGenBuffers(1, &veo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
     GLint texAttrib = glGetAttribLocation(shaderProgram, "texCoordinate");
     glVertexAttribPointer(posAttrib,3, GL_FLOAT,GL_FALSE,sizeof(Vertex), (void*)0);
@@ -58,9 +59,6 @@ void GraphicsEngine::setArrayToSky(GLuint& shaderProgram){
     this->setShader(shaderProgram);
     glVertexAttribPointer(shaders[shaderProgram].posAttrib,3, GL_FLOAT,GL_FALSE,sizeof(Vertex), (void*)0);
     glVertexAttribPointer(shaders[shaderProgram].texAttrib,2, GL_FLOAT,GL_FALSE,sizeof(Vertex), (void*)(sizeof(glm::vec3)));
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_FRONT);
-    glFrontFace(GL_CCW);
 
 }
 GLuint GraphicsEngine::initShader(char* fragName, char* vertexName){
@@ -120,7 +118,6 @@ void GraphicsEngine::setArrayToLand(GLuint& shaderProgram){
     this->setShader(shaderProgram);
     glEnableVertexAttribArray(shaders[shaderProgram].posAttrib);
     glVertexAttribPointer(shaders[shaderProgram].posAttrib,3, GL_FLOAT,GL_FALSE,sizeof(glm::vec3), (void*)0);
-    glDisable(GL_CULL_FACE);
 }
 std::string GraphicsEngine::LoadShaderSource(const std::string& filePath)
 {

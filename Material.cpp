@@ -129,7 +129,7 @@ bool Material::loadTexture(char* path, GLuint shaderProgram, char* textureName){
     this->vertices = vertices;
 }
 
-void Material::drawElementArray(std::vector<unsigned int>& elements, Shader s){
-    glUseProgram(s.shaderProgram);
+void Material::drawElementArray(std::vector<unsigned int>& elements, GLuint shaderProgram){
+    glUseProgram(shaderProgram);
     glDrawElements(GL_TRIANGLES,elements.size(),GL_UNSIGNED_INT,0);
 }

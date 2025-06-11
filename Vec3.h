@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 struct Vec3{
   float x,y,z;
   Vec3() = default;
@@ -11,6 +12,9 @@ struct Vec3{
         }
         return *this;
     }
+  void print(){
+    std::cout<<"X = "<<x<<" Y = "<<y<<"\n";
+  }
 };
 inline Vec3 operator+(const Vec3& l, const Vec3& r){
     Vec3 result;

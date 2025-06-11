@@ -26,6 +26,7 @@ class Input{
     bool isPressed(keys key);
     bool handleInputs();
     void windowInput();
+   st
     glm::vec3 translateCam(glm::vec3 look);
     glm::vec3 lookCam();
   private:

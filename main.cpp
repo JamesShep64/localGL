@@ -17,7 +17,7 @@ GraphicsEngine g;
 Game game;
 Material sky;
 SDL_Window* pWindow;
-World world = World();
+World* world;
 bool quit = false;
 std::vector<glm::vec3> triangleVertices = {
     glm::vec3(0.0f,  0.0f, 100.0f),
@@ -31,6 +31,7 @@ std::vector<GLuint> elements = {
 void initGeometry(){
     g.init();
     game.init(pWindow);
+    world = &game.world;
     sky.loadObjToTriangleArray((char*)"./sphere.obj");
     if(!sky.loadTexture((char*)"./sky.jpg", g.skyShader,(char*)"sky"))
         std::cout<<"failed to load sky"<<"\n";
@@ -52,11 +53,11 @@ void render(SDL_Window* window){
     glm::mat4 perspective = glm::perspective(glm::radians(85.0f), 8.0f/6.0f, 0.1f, 1000.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     g.setArrayToLand(g.landShader);
-    Material::setTriangleBuffer(world.man.getVertices(), g.landShader);
+    Material::setTriangleBuffer(world->manager.getVertices(), g.landShader);
     g.setCamera(g.landShader, game.cam);
     g.setModel(model,g.landShader);
-    Material::setElementBuffer(world.indices,g.landShader);
-    Material::drawElementArray(world.indices,g.landShader);
+    Material::setElementBuffer(world->indices,g.landShader);
+    Material::drawElementArray(world->indices,g.landShader);
 
     g.setArrayToSky(g.skyShader);
     Material::setTriangleBuffer(sky.vertex_array, g.skyShader);

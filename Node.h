@@ -15,20 +15,21 @@ public:
   bool surrounded = false;
 
 
-static Node createNode(Node n);
-Node& operator=(const Node& other) {
+  Node& operator=(const Node& other) {
         if (this != &other) {
             pos = other.pos;
             connections = other.connections;
+            id = other.id;
         }
         return *this;
-};
+  };
   void setPosition(float newX, float newY, float newZ);
   float distanceTo(const Node& other);
   void print() const;
   void setLink();
   void setVert(Node& n);
   void checkSurrounded();
+  Node* getClosestVertex(Node& n);
 
   static bool checkWithin(Node* vertex, Node& point);
 private:

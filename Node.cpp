@@ -1,13 +1,19 @@
 #include "Node.h"
 #include <cmath>
+#include <cstdio>
 #include <iostream>
 #include <algorithm>
-#include <memory>
 #include <vector>
 
 Node::Node(){
 
 }
+
+Node::Node(Vec3 pos, uint id){
+    this->pos = pos;
+    this->id = id;
+}
+
 Node::Node(float x, float y, float z,unsigned int id){
     pos.x = x;
     pos.y = y;
@@ -30,9 +36,20 @@ void Node::setVert(Node& n){
         A = &n;
     else if(A == nullptr)
         B = &n;
+    else
+        std::cout<<"NODE "<<id<<" FULL\n";
  if (std::find(connections->begin(), connections->end(), n.id) != connections->end())
         std::cerr<<"CONNECTING TO SAME NODE TWICE\n";
     connections->push_back(n.id);
+
+}
+
+Node* Node::getClosestVertex(Node& n){
+    auto distA = A->distanceTo(n);
+    auto distB = B->distanceTo(n);
+    if(distA < distB)
+        return A;
+    return B;
 }
 
 bool Node::checkWithin(Node* vertex, Node& point){

@@ -46,7 +46,7 @@ void Input::handleKeyboard(SDL_Event& event){
     past_keyboard = current_keyboard;
     switch( event.type ){
       case SDL_KEYDOWN:
-        //std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
+        std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
         current_keyboard[event.key.keysym.sym] = true;
         break;
 
@@ -61,6 +61,9 @@ void Input::handleKeyboard(SDL_Event& event){
 }
 void Input::windowInput(){
       //SDL_SetRelativeMouseMode(SDL_TRUE);
+}
+bool doSpawn(){
+
 }
 glm::vec3 Input::translateCam(glm::vec3 look){
     yCursorMotion=0;

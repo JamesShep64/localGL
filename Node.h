@@ -14,6 +14,10 @@ public:
   unsigned int id;
   bool surrounded = false;
 
+  Node* A = nullptr;
+  Node* B = nullptr;
+  Node* CloneB = nullptr;
+  Node* CloneF = nullptr;
 
   Node& operator=(const Node& other) {
         if (this != &other) {
@@ -40,8 +44,4 @@ void getSurroundings(std::vector<Node*>& nodes,Node* node);
 bool isHolding(std::vector<Node*>& nodes, Node* node);
 
   std::vector<uint>* connections;
-  Node* A = nullptr;
-  Node* B = nullptr;
-  Node* CloneB = nullptr;
-  Node* CloneF = nullptr;
 };

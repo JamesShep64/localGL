@@ -15,7 +15,7 @@ enum  keys{
   LEFT=1073741904,
   RIGHT=1073741903,
   UP=1073741906,
-  DOWN=1073741905
+  DOWN=1073741905,
 };
 class Input{
   public:
@@ -26,7 +26,7 @@ class Input{
     bool isPressed(keys key);
     bool handleInputs();
     void windowInput();
-   st
+    bool doSpawn();
     glm::vec3 translateCam(glm::vec3 look);
     glm::vec3 lookCam();
   private:

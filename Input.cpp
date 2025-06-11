@@ -43,15 +43,16 @@ void Input::handleMouse(SDL_Event& event){
 }
 void Input::handleKeyboard(SDL_Event& event){
     /* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
-    past_keyboard = current_keyboard;
     switch( event.type ){
       case SDL_KEYDOWN:
-        std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
+        //std::cout<<"DOWN "<<std::to_string(event.key.keysym.sym)<<"\n";
+          past_keyboard[event.key.keysym.sym] = current_keyboard[event.key.keysym.sym];
         current_keyboard[event.key.keysym.sym] = true;
         break;
 
       case SDL_KEYUP:
         //std::cout<<"UP "<<event.key.keysym.sym<<"\n";
+        past_keyboard[event.key.keysym.sym] = current_keyboard[event.key.keysym.sym];
         current_keyboard[event.key.keysym.sym] = false;
         break;
 
@@ -62,8 +63,8 @@ void Input::handleKeyboard(SDL_Event& event){
 void Input::windowInput(){
       //SDL_SetRelativeMouseMode(SDL_TRUE);
 }
-bool doSpawn(){
-
+bool Input::doSpawn(){
+  return this->wasPressed(CTRL);
 }
 glm::vec3 Input::translateCam(glm::vec3 look){
     yCursorMotion=0;
@@ -107,6 +108,7 @@ glm::vec3 Input::lookCam(){
 }
 bool Input::wasPressed(keys key){
   if(!past_keyboard[key] && current_keyboard[key]){
+    past_keyboard[key] = true;
     return true;
   }
   return false;

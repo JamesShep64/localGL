@@ -5,16 +5,16 @@
 #include <algorithm>
 #include <vector>
 
-Node::Node(){
+Node::Node(): connections(new std::vector<unsigned int>()){
 
 }
 
-Node::Node(Vec3 pos, uint id){
+Node::Node(Vec3 pos, uint id): connections(new std::vector<unsigned int>()){
     this->pos = pos;
     this->id = id;
 }
 
-Node::Node(float x, float y, float z,unsigned int id){
+Node::Node(float x, float y, float z,unsigned int id): connections(new std::vector<unsigned int>()){
     pos.x = x;
     pos.y = y;
     pos.z = z;
@@ -34,7 +34,7 @@ float Node::distanceTo(const Node& other){
 void Node::setVert(Node& n){
     if(A == nullptr)
         A = &n;
-    else if(A == nullptr)
+    else if(B == nullptr)
         B = &n;
     else
         std::cout<<"NODE "<<id<<" FULL\n";

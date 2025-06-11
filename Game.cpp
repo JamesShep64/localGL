@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "glm/glm/ext/vector_float3.hpp"
 #include "SDL_video.h"
+#include <cstdio>
 
 
 
@@ -18,5 +19,7 @@ bool Game::update(float){
     cam.moveLook(lookDelta);
     input.windowInput();
     cam.setView();
+    if(input.doSpawn())
+        world.doSpawn();
     return q;
 }

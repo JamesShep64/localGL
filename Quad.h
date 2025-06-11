@@ -97,7 +97,7 @@ public:
     
     // Add a node with coordinates
     void addNode(float x, float y, float z) {
-        nodes.emplace_back(x, y, z, nodes.size()+1);
+        nodes.emplace_back(x, y, z, nodes.size());
         vertices.emplace_back(x, y, z);
     }
     

@@ -8,9 +8,11 @@ public:
   NodeQuadManager manager;
   std::vector<uint> indices;
   void spawnNode(Node& n);
+  void doSpawn();
 private:
   float spawnRange = 50;
   float spawnDisplance = 20;
+  uint spawnIndex;
   void setVertices(Node& n);
   std::random_device rd;
   std::mt19937 gen;

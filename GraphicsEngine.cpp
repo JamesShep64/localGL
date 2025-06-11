@@ -2,7 +2,10 @@
 #include "Material.h"
 #include "ShaderStructs.h"
 #include <iostream>
-
+GraphicsEngine::~GraphicsEngine(){
+    glDeleteProgram(landShader);
+    glDeleteProgram(skyShader);
+}
 void GraphicsEngine::init(){
     landShader = this->initShader((char *)"LandFragmentShader.glsl",(char*)"NoTextureVertex.glsl");
     skyShader = this->initShader((char *)"SkyFragmentShader.glsl",(char *)"VertexShader.glsl");
@@ -76,6 +79,8 @@ GLuint GraphicsEngine::initShader(char* fragName, char* vertexName){
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
     return shaderProgram;
 }
 void GraphicsEngine::initLand(GLuint& shaderProgram){

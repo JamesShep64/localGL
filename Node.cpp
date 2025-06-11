@@ -59,7 +59,7 @@ bool Node::checkWithin(Node* vertex, Node& point){
         std::cerr<<"CheckWithin with unlinked node\n";
         return false;
     }
-    auto t_u = Node::vectorIntersection2D(vertex->pos,vertex->pos-point.pos, vertex->A->pos, vertex->B->pos);
+    auto t_u = Node::vectorIntersection2D(vertex->pos,vertex->pos - point.pos, vertex->A->pos, vertex->B->pos);
     if(t_u[0] > 1 && t_u[1] > 0 && t_u[1] < 1)
         return true;
     return checkWithin(vertex->CloneF, point) || checkWithin(vertex->CloneB, point);
@@ -109,7 +109,7 @@ bool Node::isHolding(std::vector<Node*>& nodes, Node* node){
     return isHolding(nodes,node->CloneF) || isHolding(nodes,node->CloneB);
 }
 void Node::print() const{
-    std::cout << "Node(id=" << id << ", x=" << pos.x << ", y=" <<  pos.y<< ", z=" <<  pos.z << ")" << std::endl;
+    std::cout << "Node(id=" << id << ", x=" << pos.x << ", y=" <<  pos.y<< ", z=" <<  pos.z << ")\n";
 }
 
 

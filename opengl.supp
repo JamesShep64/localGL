@@ -1,0 +1,107 @@
+{
+   WSL_drivers_all_leak_errors
+   Memcheck:Leak
+   match-leak-kinds: possible,definite,reachable,indirect
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_read1
+   Memcheck:Addr1
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_read2
+   Memcheck:Addr2
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_read4
+   Memcheck:Addr4
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_read8
+   Memcheck:Addr8
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_read16
+   Memcheck:Addr16
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_write1
+   Memcheck:Value1
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_write2
+   Memcheck:Value2
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_write4
+   Memcheck:Value4
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_write8
+   Memcheck:Value8
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_write16
+   Memcheck:Value16
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_uninit_cond
+   Memcheck:Cond
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_jump
+   Memcheck:Jump
+   ...
+   obj:*/wsl/*
+}
+
+
+
+{
+   WSL_drivers_overlap
+   Memcheck:Overlap
+   ...
+   obj:*/wsl/*
+}
+
+{
+   WSL_drivers_invalid_free
+   Memcheck:Free
+   ...
+   obj:*/wsl/*
+}

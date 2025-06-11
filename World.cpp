@@ -30,8 +30,10 @@ void World::spawnNode(Node& n){
     Node top = Node((spawnOrigin + offset),0);
     Node bottom = Node((spawnOrigin - offset),0);
     auto found = manager.rangeSearch(bottom, top);
+
     std::cout<<"SPAWN POINT: ";
-    spawnPoint.pos.print();
+    spawnPoint.print();
+
     bool spawn_collision = false;
     for(OrthoTree::index_t i : found){
         auto node = manager.nodes[i];
@@ -43,9 +45,11 @@ void World::spawnNode(Node& n){
         }
     }
     if(!spawn_collision){
+        
         manager.addNode(spawnPoint.pos.x, spawnPoint.pos.y, spawnPoint.pos.z);
         Node& newNode = manager.nodes.back();
-        newNode.setVert(n);
+        std::cout<<"NODE GOT: \n";
+        newNode.print();
         auto other_vertex = n.getClosestVertex(newNode);
         newNode.setVert(n);
         indices.push_back(newNode.id);

@@ -10,7 +10,7 @@
 class GraphicsEngine{
 public:
   void init();
-  
+  ~GraphicsEngine();  
   void setModel(glm::mat4& model, GLuint& shaderProgram);
   void setView(glm::mat4& model, GLuint& shaderProgram);
   void setPerspective(glm::mat4& model, GLuint& shaderProgram);

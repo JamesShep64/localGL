@@ -41,15 +41,18 @@ void World::spawnNode(Node& n){
     spawnPoint.print();
 
     bool spawn_collision = false;
+    std::cout<<"\nFOUND NODES";
     for(OrthoTree::index_t i : found){
+    std::cout<<i;
         auto node = manager.nodes[i];
         if(spawn_collision){
-            std::cout<<"=======================SPAWN COLLISION==================\n";
+            //std::cout<<"=======================SPAWN COLLISION==================\n";
             spawn_collision = true;
             break;
         }
     }
-    //std::cout<<"TEST: "<<manager.nodes[found[0]].id<<" | "<<manager.nodes[manager.findNearestNeighbors(n,1)[0]].id<<"\n";
+    std::cout<<"\n";
+    //std::cout<<"TEST: "<<manager.nodes[found[0]].id<<" | "<<manager.nodes[manager.findNearestNeighbors(n,1)[0]].id<<"\n"
     if(!spawn_collision){
         
         manager.addNode(spawnPoint.pos.x, spawnPoint.pos.y, spawnPoint.pos.z);

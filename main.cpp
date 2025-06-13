@@ -59,6 +59,7 @@ void render(SDL_Window* window){
     Material::setTriangleBuffer(world->manager.getVertices(), g.landShader);
     g.setCamera(g.landShader, game.cam);
     g.setModel(model,g.landShader);
+    g.setColor(glm::vec3(1.0f, 0.0f, .937f), g.landShader);
     Material::setElementBuffer(world->indices,g.landShader);
     Material::drawElementArray(world->indices,g.landShader);
 //draw sky

@@ -124,8 +124,35 @@ public:
             std::cout << "Octree not built yet!" << std::endl;
             return {};
         }
-        
-        NodeBox2D searchBox = {minCorner, maxCorner};
+        float min_x, max_x, min_y, max_y, min_z, max_z;
+        if(minCorner.pos.x < maxCorner.pos.x){
+            min_x = minCorner.pos.x;
+            max_x = maxCorner.pos.x;
+        }
+        else{
+            min_x = maxCorner.pos.x;
+            max_x = minCorner.pos.x;
+        }
+
+        if(minCorner.pos.y < maxCorner.pos.y){
+            min_y = minCorner.pos.y;
+            max_y = maxCorner.pos.y;
+        }
+        else{
+            min_y = maxCorner.pos.y;
+            max_y = minCorner.pos.y;
+        }
+        if(minCorner.pos.z < maxCorner.pos.z){
+            min_z = minCorner.pos.z;
+            max_z = maxCorner.pos.z;
+        }
+        else{
+            min_z = maxCorner.pos.z;
+            max_z = minCorner.pos.z;
+        }
+        Node min_new = Node(min_x, min_y, min_z,0);
+        Node max_new = Node(max_x, max_y, max_z,0);
+        NodeBox2D searchBox = {min_new, max_new};
         return quadtree->RangeSearch(searchBox, nodes);
     }
     

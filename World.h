@@ -10,9 +10,9 @@ public:
   void spawnNode(Node& n);
   void doSpawn();
 private:
-  float spawnRange = 50;
-  float spawnDisplance = 20;
-  uint spawnIndex;
+  float spawnRange = 20;
+  float spawnDisplance = 50;
+  int spawnIndex;
   void setVertices(Node& n);
   std::random_device rd;
   std::mt19937 gen;

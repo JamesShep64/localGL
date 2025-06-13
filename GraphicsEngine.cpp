@@ -100,6 +100,8 @@ void GraphicsEngine::initLand(GLuint& shaderProgram){
     GLint perspectiveUni = glGetUniformLocation(shaderProgram, "perspective");
 
     GLint viewUni = glGetUniformLocation(shaderProgram, "view");
+
+    GLint colorUni = glGetUniformLocation(shaderProgram, "color");
     Shader sky;
 
     sky.shaderProgram = shaderProgram;
@@ -109,6 +111,7 @@ void GraphicsEngine::initLand(GLuint& shaderProgram){
     sky.perspectiveUni = perspectiveUni;
     sky.viewUni = viewUni;
     sky.posAttrib = posAttrib;
+    sky.colorUni = colorUni;
     shaders[shaderProgram] = sky;
 
     glEnable(GL_DEPTH_TEST);
@@ -147,6 +150,10 @@ void GraphicsEngine::setPerspective(glm::mat4& m, GLuint& shaderProgram){
 void GraphicsEngine::setView(glm::mat4& m, GLuint& shaderProgram){
     glUseProgram(shaderProgram);
     glUniformMatrix4fv(shaders[shaderProgram].viewUni, 1, GL_FALSE, glm::value_ptr(m));
+}
+void GraphicsEngine::setColor(glm::vec3 v, GLuint& shaderProgram){
+    glUseProgram(shaderProgram);
+    glUniform4f(shaders[shaderProgram].colorUni,v[0], v[1], v[2],1.0f);
 }
 void GraphicsEngine::setCamera(GLuint& shaderProgram, Camera& cam){
     this->setShader(shaderProgram);

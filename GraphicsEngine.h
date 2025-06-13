@@ -14,6 +14,8 @@ public:
   void setModel(glm::mat4& model, GLuint& shaderProgram);
   void setView(glm::mat4& model, GLuint& shaderProgram);
   void setPerspective(glm::mat4& model, GLuint& shaderProgram);
+  void setColor(glm::vec3, GLuint& shaderProgram);
+
   void setCamera(GLuint& shaderProgram, Camera& cam);
 
   void setArrayToSky(GLuint& shaderProgram);

@@ -7,9 +7,9 @@ struct Shader{
   GLint modelUni;
   GLint perspectiveUni;
   GLint viewUni;
-  GLint timeColorUni;
   GLuint vbo;
   GLuint veo;
   GLuint vao;
   GLuint shaderProgram;
+  GLuint colorUni;
 };

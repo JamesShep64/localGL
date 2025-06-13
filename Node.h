@@ -33,7 +33,7 @@ public:
   void setLink();
   void setVert(Node& n);
   void checkSurrounded();
-  Node* getClosestVertex(Node& n);
+  Node* getConnectionVertex(Node& n);
 
   static bool checkWithin(Node* vertex, Node& point);
 private:

@@ -44,10 +44,10 @@ void Node::setVert(Node& n){
 
 }
 
-Node* Node::getClosestVertex(Node& n){
-    auto distA = A->distanceTo(n);
-    auto distB = B->distanceTo(n);
-    if(distA < distB)
+Node* Node::getConnectionVertex(Node& n){
+    auto t_u = Node::vectorIntersection2D(A->pos, n.pos - A->pos, A->pos, this->pos - A->pos);
+    std::cout<<t_u[0]<<" | "<<t_u[1]<<"\n";
+    if(t_u[1] < 1.0001)
         return A;
     return B;
 }
@@ -59,18 +59,19 @@ bool Node::checkWithin(Node* vertex, Node& point){
         std::cerr<<"CheckWithin with unlinked node\n";
         return false;
     }
-    auto t_u = Node::vectorIntersection2D(vertex->pos,vertex->pos - point.pos, vertex->A->pos, vertex->B->pos);
-    if(t_u[0] > 1 && t_u[1] > 0 && t_u[1] < 1)
+    auto t_u = Node::vectorIntersection2D(vertex->pos, point.pos - vertex->pos, vertex->A->pos, vertex->B->pos - vertex->A->pos);
+    std::cout<<"t = "<<t_u[0]<<" u = "<<t_u[1]<<"\n";
+    if(t_u[0] >= 1 && t_u[1] >= 0 && t_u[1] <= 1)
         return true;
     return checkWithin(vertex->CloneF, point) || checkWithin(vertex->CloneB, point);
 }
 
 std::array<float, 2> Node::vectorIntersection2D(Vec3 zero_t, Vec3 vec_t, Vec3 zero_u, Vec3 vec_u){
-    float h = vec_t.x * vec_u.y - vec_t.y * vec_u.x;
-    float t = (zero_u.x - zero_t.x) * vec_u.y - (zero_u.y - zero_t.y) * vec_u.x;
+    float h = vec_t.x * vec_u.z - vec_t.z * vec_u.x;
+    float t = (zero_u.x - zero_t.x) * vec_u.z - (zero_u.z - zero_t.z) * vec_u.x;
     t/=h;
     
-    float u = (zero_u.x - zero_t.x) * vec_t.y - (zero_u.y - zero_t.y) * vec_t.x;
+    float u = (zero_u.x - zero_t.x) * vec_t.z - (zero_u.z - zero_t.z) * vec_t.x;
     u/=h;
     return std::array<float,2>{t,u};
 }

@@ -14,7 +14,7 @@ struct Vec3{
         return *this;
     }
   void print(){
-    std::cout<<"X = "<<x<<" Y = "<<y<<"\n";
+    std::cout<<"X = "<<x<<" Y = "<<y<<" Z = "<<z<<"\n";
   }
 };
 inline Vec3 operator+(const Vec3& l, const Vec3& r){

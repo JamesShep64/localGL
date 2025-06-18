@@ -9,7 +9,7 @@ class Game{
     void init(SDL_Window* w);
     bool update(float z);
     Camera cam;
-    Input input;
-    World world;
+    Input input = Input();
+    World world = World();
   private:
 };

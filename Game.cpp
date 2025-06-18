@@ -19,7 +19,9 @@ bool Game::update(float){
     cam.moveLook(lookDelta);
     input.windowInput();
     cam.setView();
-    if(input.doSpawn())
+    if(input.doSpawn()){
+        std::cout<<"SPAWNING\n";
         world.doSpawn();
+    }
     return q;
 }

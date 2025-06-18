@@ -4,6 +4,7 @@
 #include  <SDL2/SDL_opengl.h>
 #include "Game.h"
 #include "Material.h"
+#include "Drawings.h"
 #include "World.h"
 #include "glm/glm/ext/vector_float3.hpp"
 #include <SDL2/SDL_events.h>
@@ -17,7 +18,6 @@ GraphicsEngine g;
 Game game;
 Material sky;
 SDL_Window* pWindow;
-World* world;
 bool quit = false;
 
 std::vector<glm::vec3> triangleVertices = {
@@ -31,8 +31,8 @@ std::vector<GLuint> elements = {
 
 void initGeometry(){
     g.init();
+    Drawings::init(g);
     game.init(pWindow);
-    world = &game.world;
     sky.loadObjToTriangleArray((char*)"./sphere.obj");
     if(!sky.loadTexture((char*)"./sky.jpg", g.skyShader,(char*)"sky"))
         std::cout<<"failed to load sky"<<"\n";
@@ -45,23 +45,25 @@ void render(SDL_Window* window){
     float z = 1.0;
     quit = game.update(z);
 
-    glm::mat4 view = glm::lookAt(
-    glm::vec3(0.0f, 0.0f, 300.0f),  // camera further back
-    glm::vec3(0.0f, 0.0f, 1.0f),  // looking at triangle
-    glm::vec3(0.0f, 1.0f, 0.0f));
     glm::mat4 model = glm::mat4(1.0f); // no transform
     glm::mat4 m = glm::scale(glm::mat4(1.0f),glm::vec3(3000,3000,3000));
-    glm::mat4 perspective = glm::perspective(glm::radians(85.0f), 8.0f/6.0f, 0.1f, 1000.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //draw land
     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     g.setArrayToLand(g.landShader);
-    Material::setTriangleBuffer(world->manager.getVertices(), g.landShader);
+    Material::setTriangleBuffer(game.world.manager.getVertices(), g.landShader);
     g.setCamera(g.landShader, game.cam);
     g.setModel(model,g.landShader);
     g.setColor(glm::vec3(1.0f, 0.0f, .937f), g.landShader);
-    Material::setElementBuffer(world->indices,g.landShader);
-    Material::drawElementArray(world->indices,g.landShader);
+    Material::setElementBuffer(game.world.indices,g.landShader);
+    Material::drawElementArray(game.world.indices,g.landShader);
+//draw spawn
+    Drawings::setShader(g.landShader);
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+    g.setArrayToLand(g.landShader);
+    g.setCamera(g.landShader, game.cam);
+    g.setModel(model,g.landShader);
+    Drawings::drawSquare(game.world.topSpawnCorner,game.world.bottomSpawnCorner,Drawings::YELLOW);
 //draw sky
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     g.setArrayToSky(g.skyShader);

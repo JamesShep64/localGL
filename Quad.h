@@ -93,6 +93,7 @@ public:
     // Add a node to the collection
     void addNode(const Node& node){
         nodes.push_back(node);
+        vertices.emplace_back(node.pos.x, node.pos.y, node.pos.z);
     }
     
     // Add a node with coordinates
